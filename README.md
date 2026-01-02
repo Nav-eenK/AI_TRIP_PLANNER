@@ -17,3 +17,23 @@ A **Flask web application** that helps users plan budget-friendly trips with **A
 - **Budget Suggestions** – AI recommends cost breakdown for travel, stay, food, activities, and buffer.
 - **View Trip Details** – Dashboard with trips and detailed itineraries.
 - **Responsive UI** – Clean design using Tailwind CSS.
+
+---
+
+## ⚙️ Technologies Used
+
+- **Backend:** Python, Flask, Flask-SQLAlchemy  
+- **Database:** SQLite  
+- **Authentication:** Werkzeug  
+- **Frontend:** HTML, Tailwind CSS  
+- **AI Integration:** OpenAI GPT API (or similar AI model)
+
+---
+
+## 🔗 Links
+
+- **Live Demo:** [https://your-live-demo-url.com](https://your-live-demo-url.com)  
+- **GitHub Repository:** [https://github.com/yourusername/ai-budget-trip-planner](https://github.com/yourusername/ai-budget-trip-planner)  
+- **Documentation / Wiki:** [https://github.com/yourusername/ai-budget-trip-planner/wiki](https://github.com/yourusername/ai-budget-trip-planner/wiki)  
+
+---
