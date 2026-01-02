@@ -1,0 +1,4 @@
+flask
+werkzeug.security
+datetime
+flask_sqlalchemy
