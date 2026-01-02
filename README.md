@@ -32,8 +32,7 @@ A **Flask web application** that helps users plan budget-friendly trips with **A
 
 ## 🔗 Links
 
-- **Live Demo:** [https://your-live-demo-url.com](https://your-live-demo-url.com)  
-- **GitHub Repository:** [https://github.com/yourusername/ai-budget-trip-planner](https://github.com/yourusername/ai-budget-trip-planner)  
-- **Documentation / Wiki:** [https://github.com/yourusername/ai-budget-trip-planner/wiki](https://github.com/yourusername/ai-budget-trip-planner/wiki)  
+- **Live Demo:** [https://your-live-demo-url.com](https://ai-trip-planner-1-lder.onrender.com/)  
+
 
 ---
