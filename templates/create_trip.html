@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Trip | AI Budget Trip Planner</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-indigo-600">Trip Planner</h1>
+      <div class="space-x-4">
+        <a href="{{ url_for('dashboard') }}" class="text-gray-600 hover:text-indigo-600 transition">Dashboard</a>
+        <a href="{{ url_for('logout') }}" class="text-red-500 hover:text-red-600 transition">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Form -->
+  <main class="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-lg shadow">
+    <h2 class="text-xl font-bold mb-6 text-gray-700">Create a New Trip</h2>
+
+    <form action="{{ url_for('create_trip') }}" method="POST" class="space-y-6">
+
+      <!-- Source & Destination -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-gray-600 mb-1" for="source_city">Source City</label>
+          <input type="text" name="source_city" id="source_city" required
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+        </div>
+        <div>
+          <label class="block text-gray-600 mb-1" for="destination">Destination</label>
+          <input type="text" name="destination" id="destination" required
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+        </div>
+      </div>
+
+      <!-- Dates -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-gray-600 mb-1" for="start_date">Start Date</label>
+          <input type="date" name="start_date" id="start_date" required
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+        </div>
+        <div>
+          <label class="block text-gray-600 mb-1" for="end_date">End Date</label>
+          <input type="date" name="end_date" id="end_date" required
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+        </div>
+      </div>
+
+      <!-- Trip Type & Travel Style -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-gray-600 mb-1" for="trip_type">Trip Type</label>
+          <select name="trip_type" id="trip_type" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+            <option value="solo">Solo</option>
+            <option value="couple">Couple</option>
+            <option value="family">Family</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-gray-600 mb-1" for="travel_style">Travel Style</label>
+          <select name="travel_style" id="travel_style" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+            <option value="budget">Budget</option>
+            <option value="mid">Mid-range</option>
+            <option value="luxury">Luxury</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Total Budget -->
+      <div>
+        <label class="block text-gray-600 mb-1" for="total_budget">Total Budget (INR)</label>
+        <input type="number" name="total_budget" id="total_budget" required
+          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex justify-end">
+        <button type="submit"
+          class="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-500 transition">Create Trip</button>
+      </div>
+
+    </form>
+  </main>
+
+
+</body>
+</html>
