@@ -1,4 +1,4 @@
-from flask import Flask, app, render_template, request, redirect, url_for, session
+from flask import Flask, app, flash, render_template, request, redirect, url_for, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -24,7 +24,6 @@ class User(db.Model):
     trips = db.relationship("Trip", backref="user", lazy=True)
 
 
-# 2️⃣ Trips Table (Main Entity)
 class Trip(db.Model):
     __tablename__ = "trips"
 
@@ -138,8 +137,9 @@ def login():
             session['username'] = user.username
             return redirect(url_for('dashboard'))  # go to dashboard
         else:
-            return "Invalid credentials"  # show message or render login.html again
-    # GET request
+            flash('Invalid username or password', 'error')
+            return redirect(url_for('login'))
+    
     return render_template('login.html')
 
 
@@ -159,6 +159,7 @@ def register():
         user= User(username=username, email=email, password_hash=password_hash)
         db.session.add(user)
         db.session.commit()
+        flash('Registration successful! Please log in.', 'success')
         return redirect(url_for('login'))
     
     return render_template('register.html')
@@ -174,9 +175,62 @@ def dashboard():
 
     return render_template('dashboard.html', username=user.username, trips=trips)
 
-@app.route("/create_trip")
+@app.route("/create_trip", methods=["GET", "POST"])
 def create_trip():
-    return render_template('create_trip.html')
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    if request.method == "POST":
+       
+        source = request.form['source_city']
+        destination = request.form['destination']
+        start_date = datetime.strptime(request.form['start_date'], "%Y-%m-%d")
+        end_date = datetime.strptime(request.form['end_date'], "%Y-%m-%d")
+        total_days = (end_date - start_date).days + 1
+        total_budget = float(request.form['total_budget'])
+        trip_type = request.form['trip_type']
+        travel_style = request.form['travel_style']
+
+        trip = Trip(
+            user_id=session['user_id'],
+            source_city=source,
+            destination=destination,
+            start_date=datetime.strptime(start_date, "%Y-%m-%d"),
+            end_date=datetime.strptime(end_date, "%Y-%m-%d"),
+            total_days=total_days,
+            total_budget=total_budget,
+            trip_type=trip_type,
+            travel_style=travel_style
+        )
+        db.session.add(trip)
+        db.session.commit()
+
+        # --- Preferences ---
+        preference = Preference(
+            trip_id=trip.id,
+            food_preference=request.form['food_preference'],
+            activity_type=request.form['activity_type'],
+            accommodation_type=request.form['accommodation_type'],
+            transport_preference=request.form['transport_preference'],
+            pace=request.form['pace']
+        )
+        db.session.add(preference)
+
+        # --- Budget Placeholder (AI will fill later) ---
+        budget = Budget(
+            trip_id=trip.id,
+            travel_cost=0,
+            stay_cost=0,
+            food_cost=0,
+            activity_cost=0,
+            buffer_cost=0
+        )
+        db.session.add(budget)
+        db.session.commit()
+        flash("Trip created! AI will generate itinerary soon.", "success")
+        return redirect(url_for('dashboard'))
+
+    return render_template("create_trip.html")
 @app.route("/logout")
 def logout():
     session.clear()
