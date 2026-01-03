@@ -195,8 +195,8 @@ def create_trip():
             user_id=session['user_id'],
             source_city=source,
             destination=destination,
-            start_date=datetime.strptime(start_date, "%Y-%m-%d"),
-            end_date=datetime.strptime(end_date, "%Y-%m-%d"),
+            start_date = datetime.strptime(request.form['start_date'], "%Y-%m-%d").date(),
+            end_date = datetime.strptime(request.form['end_date'], "%Y-%m-%d").date(),
             total_days=total_days,
             total_budget=total_budget,
             trip_type=trip_type,
@@ -231,6 +231,47 @@ def create_trip():
         return redirect(url_for('dashboard'))
 
     return render_template("create_trip.html")
+@app.route('/trip/<int:trip_id>')
+def view_trip(trip_id):
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    trip = Trip.query.get_or_404(trip_id)
+    if trip.user_id != session['user_id']:
+        flash("You do not have access to this trip.", "error")
+        return redirect(url_for('dashboard'))
+
+    preferences = trip.preferences
+    budget = trip.budget
+
+
+    return render_template('trip_details.html', trip=trip, preferences=preferences, budget=budget)
+
+@app.route('/trip/<int:trip_id>/delete', methods=['POST'])
+def delete_trip(trip_id):
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    trip = Trip.query.get_or_404(trip_id)
+    if trip.user_id != session['user_id']:
+        flash("You do not have permission to delete this trip.", "error")
+        return redirect(url_for('dashboard'))
+
+    # Delete associated data
+    if trip.preferences:
+        db.session.delete(trip.preferences)
+    if trip.budget:
+        db.session.delete(trip.budget)
+    for itinerary in trip.itineraries:
+        for activity in itinerary.activities:
+            db.session.delete(activity)
+        db.session.delete(itinerary)
+
+    db.session.delete(trip)
+    db.session.commit()
+    flash("Trip deleted successfully.", "success")
+    return redirect(url_for('dashboard'))
+
 @app.route("/logout")
 def logout():
     session.clear()
