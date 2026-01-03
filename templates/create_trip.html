@@ -79,12 +79,77 @@
         <input type="number" name="total_budget" id="total_budget" required
           class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400">
       </div>
+          <!-- Preferences -->
+    <div class="border-t pt-6">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">Travel Preferences</h3>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+        <!-- Food Preference -->
+        <div>
+          <label class="block text-gray-600 mb-1">Food Preference</label>
+          <select name="food_preference" required
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-indigo-400">
+            <option value="veg">Vegetarian</option>
+            <option value="non-veg">Non-Vegetarian</option>
+            <option value="vegan">Vegan</option>
+          </select>
+        </div>
+
+        <!-- Activity Type -->
+        <div>
+          <label class="block text-gray-600 mb-1">Activity Type</label>
+          <select name="activity_type" required
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-indigo-400">
+            <option value="relaxation">Relaxation</option>
+            <option value="adventure">Adventure</option>
+            <option value="sightseeing">Sightseeing</option>
+          </select>
+        </div>
+
+        <!-- Accommodation -->
+        <div>
+          <label class="block text-gray-600 mb-1">Accommodation Type</label>
+          <select name="accommodation_type" required
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-indigo-400">
+            <option value="hostel">Hostel</option>
+            <option value="hotel">Hotel</option>
+            <option value="resort">Resort</option>
+          </select>
+        </div>
+
+        <!-- Transport -->
+        <div>
+          <label class="block text-gray-600 mb-1">Transport Preference</label>
+          <select name="transport_preference" required
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-indigo-400">
+            <option value="public">Public Transport</option>
+            <option value="cab">Cab</option>
+            <option value="self">Self Drive</option>
+          </select>
+        </div>
+
+        <!-- Pace -->
+        <div class="sm:col-span-2">
+          <label class="block text-gray-600 mb-1">Trip Pace</label>
+          <select name="pace" required
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-indigo-400">
+            <option value="slow">Slow & Relaxed</option>
+            <option value="moderate">Moderate</option>
+            <option value="fast">Fast & Packed</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+
 
       <!-- Submit Button -->
       <div class="flex justify-end">
         <button type="submit"
           class="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-500 transition">Create Trip</button>
       </div>
+
 
     </form>
   </main>
