@@ -26,7 +26,7 @@ A **Flask web application** that helps users plan budget-friendly trips with **A
 - **Database:** SQLite  
 - **Authentication:** Werkzeug  
 - **Frontend:** HTML, Tailwind CSS  
-- **AI Integration:** OpenAI GPT API (or similar AI model)
+- **AI Integration:** OpenAI GPT API (or similar AI model).
 
 ---
 
