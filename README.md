@@ -30,9 +30,3 @@ A **Flask web application** that helps users plan budget-friendly trips with **A
 
 ---
 
-## 🔗 Links
-
-- **Live Demo:** [https://your-live-demo-url.com](https://ai-trip-planner-82hp.onrender.com/)  
-
-
----
